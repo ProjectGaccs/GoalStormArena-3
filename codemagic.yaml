@@ -3,17 +3,11 @@ workflows:
     name: Unity Android Build
     max_build_duration: 60
     environment:
-      unity: "6000.0.33f1" # тут рядок, не обʼєкт!
-      vars:
-        KEYSTORE_PASSWORD: $KEYSTORE_PASSWORD
-        KEY_ALIAS: $KEY_ALIAS
-        KEY_PASSWORD: $KEY_PASSWORD
-        GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+      unity: "6000.0.33f1"
       android_signing:
-        - keystore: $ANDROID_KEYSTORE
-          keystore_password: $KEYSTORE_PASSWORD
-          key_alias: $KEY_ALIAS
-          key_password: $KEY_PASSWORD
+        - my-signing # 👈 тут лише назва конфігурації з UI
+      vars:
+        GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
 
     scripts:
       - name: Build .aab with Unity
