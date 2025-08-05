@@ -5,7 +5,7 @@ workflows:
     environment:
       unity: "6000.0.33f1"
       android_signing:
-        - secrets # 👈 тут лише назва конфігурації з UI
+        - goalstormarena # 👈 тут лише назва конфігурації з UI
       vars:
         GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
 
