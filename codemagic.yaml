@@ -3,7 +3,7 @@ workflows:
     name: Unity Android Build & Publish
     environment:
       vars:
-        UNITY_VERSION: 2022.3.16f1  # заміни на свою
+        UNITY_VERSION: 6000.0.33f1  # заміни на свою
         ANDROID_KEYSTORE: EncryptedKeystore
         ANDROID_KEYSTORE_PASSWORD: EncryptedKeystorePassword
         ANDROID_KEY_ALIAS: EncryptedKeyAlias
