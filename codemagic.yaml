@@ -3,23 +3,20 @@ workflows:
     name: Unity Android Build
     max_build_duration: 60
     environment:
-      unity:
-        version: "6000.0.33f1"
+      unity: "6000.0.33f1" # тут рядок, не обʼєкт!
       vars:
-        UNITY_VERSION: "6000.0.33f1"
-        ANDROID_KEYSTORE: $ANDROID_KEYSTORE
         KEYSTORE_PASSWORD: $KEYSTORE_PASSWORD
         KEY_ALIAS: $KEY_ALIAS
         KEY_PASSWORD: $KEY_PASSWORD
         GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
       android_signing:
-        keystore: $ANDROID_KEYSTORE
-        keystore_password: $KEYSTORE_PASSWORD
-        key_alias: $KEY_ALIAS
-        key_password: $KEY_PASSWORD
+        - keystore: $ANDROID_KEYSTORE
+          keystore_password: $KEYSTORE_PASSWORD
+          key_alias: $KEY_ALIAS
+          key_password: $KEY_PASSWORD
 
     scripts:
-      - name: Build Android AAB
+      - name: Build .aab with Unity
         script: |
           unity-editor -batchmode -quit -nographics -silent-crashes \
             -projectPath . \
