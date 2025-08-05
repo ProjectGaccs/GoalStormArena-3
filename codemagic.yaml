@@ -1,0 +1,29 @@
+workflows:
+  unity-android-build:
+    name: Unity Android Build & Publish
+    environment:
+      vars:
+        UNITY_VERSION: 2022.3.16f1  # заміни на свою
+        ANDROID_KEYSTORE: EncryptedKeystore
+        ANDROID_KEYSTORE_PASSWORD: EncryptedKeystorePassword
+        ANDROID_KEY_ALIAS: EncryptedKeyAlias
+        ANDROID_KEY_PASSWORD: EncryptedKeyPassword
+      unity:
+        version: $UNITY_VERSION
+    scripts:
+      - name: Activate Unity license
+        script: unity-activate
+      - name: Build Android
+        script: |
+          echo "Building Unity project for Android"
+          /Applications/Unity/Hub/Editor/$UNITY_VERSION/Unity.app/Contents/MacOS/Unity \
+            -batchmode -nographics -silent-crashes \
+            -projectPath . \
+            -executeMethod BuildScript.BuildAndroid \
+            -quit
+    artifacts:
+      - build/*.aab
+    publishing:
+      google_play:
+        credentials: encrypted:google_play_credentials.json
+        track: internal
