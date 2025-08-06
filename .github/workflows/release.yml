@@ -19,13 +19,11 @@ jobs:
     steps:
       - name: Print Inputs
         run: |
-          echo "release_tag: ${{ github.event.inputs.release_tag }}"
           echo "aab_asset_name: ${{ github.event.inputs.aab_asset_name }}"
       - name: Download .aab from GitHub Release
         uses: dsaltares/fetch-gh-release-asset@1.1.2
         with:
           repo: ProjectGaccs/GoalStormArena-3
-          version: ${{ github.event.inputs.release_tag }}
           file: ${{ github.event.inputs.aab_asset_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
