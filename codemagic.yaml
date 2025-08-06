@@ -10,16 +10,16 @@ workflows:
         GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
 
     scripts:
-      - name: Build .aab with Unity
-        script: |
-          unity-editor -batchmode -quit -nographics -silent-crashes \
-            -projectPath . \
-            -executeMethod BuildScript.BuildAndroid
       - name: Debug env
         script: |
           echo "=== GOOGLE CREDS BEGIN ==="
           echo "$GCLOUD_SERVICE_ACCOUNT_CREDENTIALS"
           echo "=== GOOGLE CREDS END ==="
+      - name: Build .aab with Unity
+        script: |
+          unity-editor -batchmode -quit -nographics -silent-crashes \
+            -projectPath . \
+            -executeMethod BuildScript.BuildAndroid
 
     artifacts:
       - build/app.aab
