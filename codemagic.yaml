@@ -7,13 +7,13 @@ workflows:
       android_signing:
         - goalstormarena # 👈 тут лише назва конфігурації з UI
       vars:
-        GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        GCLOUD_SERVICE_ACCOUNT_CREDENTIALS: $GOOGLE_PLAY_JSON
 
     scripts:
       - name: Debug env
         script: |
           echo "=== GOOGLE CREDS BEGIN ==="
-          echo "$GCLOUD_SERVICE_ACCOUNT_CREDENTIALS"
+          echo "$GOOGLE_PLAY_JSON"
           echo "=== GOOGLE CREDS END ==="
       - name: Build .aab with Unity
         script: |
@@ -26,5 +26,5 @@ workflows:
 
     publishing:
       google_play:
-        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
+        credentials: $GOOGLE_PLAY_JSON
         track: internal
