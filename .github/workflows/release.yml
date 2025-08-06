@@ -21,7 +21,7 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@1.1.2
         with:
           repo: ProjectGaccs/GoalStormArena-3
-          tag: ${{ github.event.inputs.release_tag }}
+          version: ${{ github.event.inputs.release_tag }}
           file: ${{ github.event.inputs.aab_asset_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
