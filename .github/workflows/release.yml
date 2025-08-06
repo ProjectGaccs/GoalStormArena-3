@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       aab_asset_name:
-        description: 'The name of the .aab asset in the release'
+        description: 'The name of the .aab asset in the release (e.g. app-release.aab)'
         required: true
 
 permissions:
@@ -13,14 +13,18 @@ permissions:
 jobs:
   publish-to-play:
     runs-on: ubuntu-latest
+
     steps:
       - name: Print Inputs
         run: |
-          echo "aab_asset_name: ${{ github.event.inputs.aab_asset_name }}"
+          echo "Asset: ${{ github.event.inputs.aab_asset_name }}"
+
       - name: Download .aab from GitHub Release
         uses: dsaltares/fetch-gh-release-asset@1.1.2
         with:
+          repo: ProjectGaccs/GoalStormArena-3
           file: ${{ github.event.inputs.aab_asset_name }}
+          token: ${{ secrets.GH_PERSONAL_TOKEN }}
 
       - name: Upload to Google Play
         uses: r0adkll/upload-google-play@v1
