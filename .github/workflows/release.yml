@@ -1,27 +1,31 @@
-name: Upload AAB to Google Play
+name: Publish .aab from GitHub Release to Google Play
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'The release tag to fetch .aab from'
+        required: true
+      aab_asset_name:
+        description: 'The name of the .aab asset in the release'
+        required: true
 
 jobs:
-  deploy:
-    name: Deploy to Google Play
+  publish-to-play:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Download .aab from GitHub Release
+        uses: dsaltares/fetch-gh-release-asset@v1.1.0
+        with:
+          repo: ProjectGaccs/GoalStormArena-3
+          tag: ${{ github.event.inputs.release_tag }}
+          file: ${{ github.event.inputs.aab_asset_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Display files (debug)
-        run: ls -R release
-
-      - name: Upload AAB to Google Play
+      - name: Upload to Google Play
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_JSON }}
           packageName: com.goal.storm.arena
-          releaseFile: release/Goal_Storm_Arena_1.aab
+          releaseFiles: ${{ github.event.inputs.aab_asset_name }}
           track: internal
