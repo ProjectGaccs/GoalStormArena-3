@@ -1,24 +1,26 @@
-name: Promote Internal Release to Alpha
+name: Promote Release to Alpha
 
 on:
   workflow_dispatch:
-    inputs:
-      version_code:
-        description: 'Version code of the release to promote (e.g. 3)'
-        required: true
 
 jobs:
   promote-release:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Promote Release to Alpha Track
-        uses: r0adkll/upload-google-play@v1
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_JSON }}
-          packageName: com.goal.storm.arena
-          track: alpha
-          userFraction: 1.0
-          status: completed
-          releaseStatus: completed
-          versionCodes: ${{ github.event.inputs.version_code }}
+          ruby-version: 3.1
+
+      - name: Install Fastlane
+        run: gem install fastlane
+
+      - name: Promote to Alpha
+        uses: maierj/fastlane-action@v2.0.0
+        with:
+          lane: promote_to_alpha
+        env:
+          GOOGLE_PLAY_JSON_KEY: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
