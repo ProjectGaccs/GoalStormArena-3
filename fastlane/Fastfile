@@ -6,7 +6,7 @@ platform :android do
       json_key_data: ENV["GOOGLE_PLAY_JSON_KEY"],
       package_name: "com.goal.storm.arena",
       track: "alpha",
-      version_code: 2
+      track_promote_to: "internal"
     )
   end
 end
