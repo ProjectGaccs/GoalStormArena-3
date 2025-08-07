@@ -3,7 +3,7 @@ default_platform(:android)
 platform :android do
   lane :promote_to_alpha do
     supply(
-      json_key_data: ENV["GOOGLE_PLAY_JSON_KEY"],
+      json_key_data: ENV["GOOGLE_PLAY_JSON"],
       package_name: "com.goal.storm.arena",
       track: "alpha",
       version_code: 2,
