@@ -32,4 +32,5 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_JSON }}
           packageName: com.goal.storm.arena
           releaseFiles: ${{ github.event.inputs.aab_asset_name }}
-          track: internal
+          track: alpha
+          status: completed
