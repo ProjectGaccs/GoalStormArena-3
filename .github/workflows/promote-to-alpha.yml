@@ -23,4 +23,4 @@ jobs:
         with:
           lane: promote_to_alpha
         env:
-          GOOGLE_PLAY_JSON_KEY: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
+          GOOGLE_PLAY_JSON_KEY: ${{ secrets.GOOGLE_PLAY_JSON }}
