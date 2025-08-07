@@ -1,0 +1,24 @@
+name: Promote Internal Release to Alpha
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: 'Version code of the release to promote (e.g. 3)'
+        required: true
+
+jobs:
+  promote-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Promote Release to Alpha Track
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_JSON }}
+          packageName: com.goal.storm.arena
+          track: alpha
+          userFraction: 1.0
+          status: completed
+          releaseStatus: completed
+          versionCodes: ${{ github.event.inputs.version_code }}
