@@ -1,0 +1,36 @@
+name: Push new version to Alpha
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download AAB from GitHub Release
+        run: |
+          mkdir -p build_output
+          gh release download latest \
+            --pattern "*.aab" \
+            --dir build_output
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          
+      - name: Install Fastlane
+        run: gem install fastlane
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run Fastlane uploading
+        env:
+          GOOGLE_PLAY_JSON_KEY: ${{ secrets.GOOGLE_PLAY_JSON_KEY }}
+        run: |
+          export GOOGLE_PLAY_JSON_KEY="$(echo "$GOOGLE_PLAY_JSON_KEY")"
+          fastlane upload_to_alpha
