@@ -2,10 +2,11 @@ platform :android do
   lane :upload_to_alpha do
     supply(
       json_key_data: ENV["GOOGLE_PLAY_JSON_KEY"], # або замість ENV — просто шлях до створеного JSON-файлу з ключем від Google Cloud Console
-      package_name: "com.goal.storm.arena",        # Bundle-ID створеного в консолі андроїд додатку
+      package_name: "com.goal.storm.arena",       # Bundle-ID створеного в консолі андроїд додатку
       aab: "build_output/Goal_Storm_Arena_3.aab", # шлях до aab після завантаження його туди у workflow з GitHub Releases
       track: "alpha",
       release_status: "completed",                 # обов’язково, щоб реліз став видимий
+      default_to_all_regions: true,                № обов'язково, щоб автоматично додати усі країни в реліз
       skip_upload_changelogs: false,
       skip_upload_images: true,
       skip_upload_screenshots: true,
