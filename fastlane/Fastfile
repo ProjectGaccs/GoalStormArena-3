@@ -6,7 +6,7 @@ platform :android do
       aab: "build_output/Goal_Storm_Arena_3.aab", # шлях до aab після завантаження його туди у workflow з GitHub Releases
       track: "alpha",
       release_status: "completed",                 # обов’язково, щоб реліз став видимий
-      default_to_all_regions: true,                № обов'язково, щоб автоматично додати усі країни в реліз
+      default_to_all_regions: true,                # обов'язково, щоб автоматично додати усі країни в реліз
       skip_upload_changelogs: false,
       skip_upload_images: true,
       skip_upload_screenshots: true,
