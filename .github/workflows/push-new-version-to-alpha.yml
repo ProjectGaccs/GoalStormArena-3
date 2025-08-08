@@ -15,7 +15,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p build_output
-          gh release download latest \
+          gh release download 3.0.0 \
             --pattern "*.aab" \
             --dir build_output
 
