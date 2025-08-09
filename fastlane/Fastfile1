@@ -1,0 +1,15 @@
+platform :android do
+  lane :upload_to_internal do
+    supply(
+      json_key_data: ENV["GOOGLE_PLAY_JSON_KEY"], # або замість ENV — просто шлях до створеного JSON-файлу з ключем від Google Cloud Console
+      package_name: "com.goal.storm.arena",       # Bundle-ID створеного в консолі андроїд додатку
+      aab: "build_output/Goal_Storm_Arena_1.aab", # шлях до aab після завантаження його туди у workflow з GitHub Releases
+      track: "internal",
+      release_status: "completed",                 # обов’язково, щоб реліз став видимий
+      skip_upload_changelogs: false,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_metadata: true
+    )
+  end
+end
